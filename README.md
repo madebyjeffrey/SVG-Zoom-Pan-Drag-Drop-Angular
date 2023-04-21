@@ -1,3 +1,7 @@
+# Resources
+The youtube tutorial video for this code can be found at
+part 1: https://www.youtube.com/watch?v=lr-AeQa4FiY
+
 # SvgTest
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.19.
