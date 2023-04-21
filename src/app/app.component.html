@@ -1,0 +1,30 @@
+<h1>SVG drag drop</h1>
+
+<div style="padding: 20px">
+  <svg style="border: 1px solid green"
+    #svgGrid
+    (pointerdown)="pointerDown($event, svgGrid, dragOperationTypes.Grid)"
+    (pointermove)="pointerMove($event)"
+    (pointerup)="pointerUp($event)"
+    (wheel)="mouseWheel($event)"
+    viewBox="0, 0, 500, 500"
+    width="500" height="500">
+
+    <g *ngFor="let index of [].constructor(39); let i = index">
+      <path stroke="green" stroke-width="0.2" [attr.d]="'M ' + ((i+1) * 50) + ' 0 V 2000'"></path>
+      <text font-size="10" [attr.x]="(i * 50) + 30" y="10">{{(i + 1) * 50}}</text>
+    </g>
+
+    <g *ngFor="let index of [].constructor(39); let i = index">
+      <path stroke="green" stroke-width="0.2" [attr.d]="'M 0 ' + ((i+1) * 50) + ' H 2000'"></path>
+      <text font-size="10" [attr.y]="(i * 50) + 45" x="10">{{(i + 1) * 50}}</text>
+    </g>
+
+
+    <rect x="200" y="200" width="100" height="100" 
+      fill="blue" class="draggable" #rect1
+      (pointerdown)="pointerDown($event, rect1, dragOperationTypes.Shape)"></rect>
+
+  </svg>
+
+</div>
