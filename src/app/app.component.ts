@@ -1,4 +1,3 @@
-import { createViewChild } from '@angular/compiler/src/core';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 enum DragOperationTypes {
@@ -12,8 +11,8 @@ enum DragOperationTypes {
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit{
-  
+export class AppComponent implements AfterViewInit {
+
   @ViewChild('svgGrid') svgGrid: ElementRef<SVGSVGElement>
   public dragOperationTypes: typeof DragOperationTypes = DragOperationTypes;
 
@@ -35,7 +34,7 @@ export class AppComponent implements AfterViewInit{
 
   pointerMoveInterval;
 
-  ngAfterViewInit(){
+  ngAfterViewInit(): void{
 
     let screenCTM = this.svgGrid.nativeElement.getScreenCTM();
     //console.log("screenCTM", screenCTM)
@@ -51,7 +50,7 @@ export class AppComponent implements AfterViewInit{
 
   mouseWheel(wheelEvent: WheelEvent) {
     const zoomScale = 1.1;
-    
+
     wheelEvent.stopPropagation();
     let zoomX = wheelEvent.offsetX;
     let zoomY = wheelEvent.offsetY;
@@ -77,7 +76,7 @@ export class AppComponent implements AfterViewInit{
     let [viewboxX, viewboxY, viewboxWidth, viewboxHeight] = this.svgGrid.nativeElement.getAttribute('viewBox')
       .split(' ')
       .map(s => parseFloat(s))
-  
+
     if(zoomDirection > 0) {
       scaledViewboxWidth = viewboxWidth / zoomScale;
       scaledViewboxHeight = viewboxHeight / zoomScale;
@@ -93,7 +92,7 @@ export class AppComponent implements AfterViewInit{
       scaledViewboxY = viewboxY - ((scaledViewboxHeight - viewboxHeight) * zoomTopFraction)
     }
 
-    const scaledViewbox = [scaledViewboxX, scaledViewboxY, scaledViewboxWidth, scaledViewboxHeight] 
+    const scaledViewbox = [scaledViewboxX, scaledViewboxY, scaledViewboxWidth, scaledViewboxHeight]
                             .map(s => s.toFixed(2))
                             .join(' ')
     this.svgGrid.nativeElement.setAttribute('viewBox',scaledViewbox )
@@ -189,18 +188,18 @@ export class AppComponent implements AfterViewInit{
 
 
       else {
-        
+
         clearInterval(this.pointerMoveInterval)
-        
+
         switch(this.dragOperationType) {
           case DragOperationTypes.Shape:
-            
+
             this.dragShape(this.selectedElement, mouseDeltaX, mouseDeltaY);
           break;
           case DragOperationTypes.Grid:
-            
+
             this.dragGrid(mouseDeltaX, mouseDeltaY);
-  
+
           break;
 
         }
@@ -235,7 +234,7 @@ export class AppComponent implements AfterViewInit{
     viewboxX -= mouseDeltaX * this.currentViewboxToSvgRatio;
     viewboxY -= mouseDeltaY * this.currentViewboxToSvgRatio;
 
-    let scaledViewbox = [viewboxX, viewboxY, viewboxWidth, viewboxHeight] 
+    let scaledViewbox = [viewboxX, viewboxY, viewboxWidth, viewboxHeight]
       .map(s => s.toFixed(2))
       .join(' ')
 
@@ -278,7 +277,7 @@ export class AppComponent implements AfterViewInit{
   //     console.log("mousePositionX", mousePositionX);
   //     console.log("mousePositionY", mousePositionY);
 
-      
+
   //     let ctm = this.svgGrid.nativeElement.getScreenCTM();
   //     mousePositionX -= ctm.e;
   //     mousePositionY -= ctm.f;
@@ -289,7 +288,7 @@ export class AppComponent implements AfterViewInit{
 
   //     this.selectedElement.setAttributeNS(null, 'x', mousePositionX);
   //     this.selectedElement.setAttributeNS(null, 'y', mousePositionY);
-      
+
   //     console.log("mousePositionX", mousePositionX)
   //     console.log("mousePositionY", mousePositionY)
 
