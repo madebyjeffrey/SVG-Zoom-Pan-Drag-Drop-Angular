@@ -10,20 +10,24 @@
     viewBox="0, 0, 500, 500"
     width="500" height="500">
 
-    <g *ngFor="let index of [].constructor(39); let i = index">
-      <path stroke="green" stroke-width="0.2" [attr.d]="'M ' + ((i+1) * 50) + ' 0 V 2000'"></path>
-      <text font-size="10" [attr.x]="(i * 50) + 30" y="10">{{(i + 1) * 50}}</text>
-    </g>
+    @for (index of [].constructor(39); track index; let i = $index) {
+      <g>
+        <path stroke="green" stroke-width="0.2" [attr.d]="'M ' + ((i+1) * 50) + ' 0 V 2000'"></path>
+        <text font-size="10" [attr.x]="(i * 50) + 30" y="10">{{(i + 1) * 50}}</text>
+      </g>
+    }
 
-    <g *ngFor="let index of [].constructor(39); let i = index">
-      <path stroke="green" stroke-width="0.2" [attr.d]="'M 0 ' + ((i+1) * 50) + ' H 2000'"></path>
-      <text font-size="10" [attr.y]="(i * 50) + 45" x="10">{{(i + 1) * 50}}</text>
-    </g>
+    @for (index of [].constructor(39); track index; let i = $index) {
+      <g>
+        <path stroke="green" stroke-width="0.2" [attr.d]="'M 0 ' + ((i+1) * 50) + ' H 2000'"></path>
+        <text font-size="10" [attr.y]="(i * 50) + 45" x="10">{{(i + 1) * 50}}</text>
+      </g>
+    }
 
 
-    <rect x="200" y="200" width="100" height="100" 
+    <rect x="200" y="200" width="100" height="100"
       fill="blue" class="draggable" #rect1
-      (pointerdown)="pointerDown($event, rect1, dragOperationTypes.Shape)"></rect>
+    (pointerdown)="pointerDown($event, rect1, dragOperationTypes.Shape)"></rect>
 
   </svg>
 
