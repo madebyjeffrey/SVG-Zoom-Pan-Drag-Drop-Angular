@@ -36,7 +36,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void{
 
-    let screenCTM = this.svgGrid.nativeElement.getScreenCTM();
+    const screenCTM = this.svgGrid.nativeElement.getScreenCTM();
     //console.log("screenCTM", screenCTM)
 
     this.svgLeft = screenCTM.e;
@@ -52,20 +52,20 @@ export class AppComponent implements AfterViewInit {
     const zoomScale = 1.1;
 
     wheelEvent.stopPropagation();
-    let zoomX = wheelEvent.offsetX;
-    let zoomY = wheelEvent.offsetY;
+    const zoomX = wheelEvent.offsetX;
+    const zoomY = wheelEvent.offsetY;
 
     console.log("zoomX", zoomX, "zoomY", zoomY)
 
-    let zoomDirection = wheelEvent.deltaY;
+    const zoomDirection = wheelEvent.deltaY;
 
     let scaledViewboxWidth
     let scaledViewboxHeight
     let scaledViewboxX
     let scaledViewboxY
 
-    let zoomLeftFraction = zoomX / this.svgGrid.nativeElement.clientWidth;
-    let zoomTopFraction = zoomY / this.svgGrid.nativeElement.clientHeight;
+    const zoomLeftFraction = zoomX / this.svgGrid.nativeElement.clientWidth;
+    const zoomTopFraction = zoomY / this.svgGrid.nativeElement.clientHeight;
 
     console.log("zoomLeftFraction", zoomLeftFraction, "zoomTopFraction", zoomTopFraction)
 
@@ -73,7 +73,7 @@ export class AppComponent implements AfterViewInit {
 
     //console.log("deltaY", deltaY)
 
-    let [viewboxX, viewboxY, viewboxWidth, viewboxHeight] = this.svgGrid.nativeElement.getAttribute('viewBox')
+    const [viewboxX, viewboxY, viewboxWidth, viewboxHeight] = this.svgGrid.nativeElement.getAttribute('viewBox')
       .split(' ')
       .map(s => parseFloat(s))
 
@@ -120,12 +120,12 @@ export class AppComponent implements AfterViewInit {
   pointerMove(event) {
     if(this.selectedElement) {
 
-      let gutter = 10;
-      let step = 20;
-      let intervalTime = 100
+      const gutter = 10;
+      const step = 20;
+      const intervalTime = 100
 
-      let mouseDeltaX = event.clientX - this.lastMouseEvent.clientX;
-      let mouseDeltaY = event.clientY - this.lastMouseEvent.clientY;
+      const mouseDeltaX = event.clientX - this.lastMouseEvent.clientX;
+      const mouseDeltaY = event.clientY - this.lastMouseEvent.clientY;
 
       if(event.clientX > (this.svgRight - gutter)) {
         clearInterval(this.pointerMoveInterval)
@@ -234,7 +234,7 @@ export class AppComponent implements AfterViewInit {
     viewboxX -= mouseDeltaX * this.currentViewboxToSvgRatio;
     viewboxY -= mouseDeltaY * this.currentViewboxToSvgRatio;
 
-    let scaledViewbox = [viewboxX, viewboxY, viewboxWidth, viewboxHeight]
+    const scaledViewbox = [viewboxX, viewboxY, viewboxWidth, viewboxHeight]
       .map(s => s.toFixed(2))
       .join(' ')
 
